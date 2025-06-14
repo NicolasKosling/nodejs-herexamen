@@ -3,6 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
+import taskRoutes from "./routes/taskRoutes";
 
 // Optionally: import notFound and your routes
 // import { notFound } from "./controllers/notFoundController";
@@ -28,7 +29,7 @@ app.get("/", (_req, res) => {
 });
 
 // // Example of where routes will go soon
-// app.use("/api/tasks", tasksRoutes);
+app.use("/api/tasks", taskRoutes);
 // app.all("*", notFound);
 
 // Database connection before listening
