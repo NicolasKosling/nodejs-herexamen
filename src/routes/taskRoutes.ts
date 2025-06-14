@@ -4,6 +4,7 @@ import {
   getTasks,
   getTaskById,
   updateTask,
+  deleteTask,
 } from "../controllers/taskController";
 
 const router = Router();
@@ -19,5 +20,8 @@ router.get("/:id", getTaskById);
 
 //UPDATE task by id
 router.put("/:id", updateTask);
+
+//DELETE task by id
+router.delete("/:id", deleteTask);
 
 export default router;

@@ -142,3 +142,24 @@ export const updateTask = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to update task.", error: err });
   }
 };
+
+// delete an existing task --DELETE /api/tasks/:id--
+export const deleteTask = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    // Validate id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      res.status(400).json({ message: "Invalid task ID." });
+    }
+
+    const deleted = await Task.findByIdAndDelete(id);
+
+    if (!deleted) {
+      res.status(404).json({ message: "Task not found." });
+    }
+
+    res.json({ message: "Task deleted successfully." });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete task.", error: err });
+  }
+};
