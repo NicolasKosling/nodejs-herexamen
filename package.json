@@ -22,7 +22,8 @@
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "mongoose": "^8.9.5"
+    "mongoose": "^8.9.5",
+    "pkgroll": "^2.12.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",
@@ -31,7 +32,6 @@
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
-    "pkgroll": "^2.12.2",
     "prettier": "^3.5.3",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
