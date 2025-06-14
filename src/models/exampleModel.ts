@@ -1,20 +1,31 @@
 import mongoose from "mongoose";
 
-const todoSchema = new mongoose.Schema(
+const taskSchema = new mongoose.Schema(
   {
-    task: {
+    title: {
       type: String,
       required: true,
-      trim: true,
     },
-    done: {
-      type: Boolean,
-      default: false,
+    description: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    priority: {
+      type: String,
+      required: true,
+    },
+    dueDate: {
+      type: Date,
+      required: false,
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Adds createdAt and updatedAt fields
   }
 );
 
-export const Todo = mongoose.model("Todo", todoSchema);
+export const Task = mongoose.model("Task", taskSchema);
