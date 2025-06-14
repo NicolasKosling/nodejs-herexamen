@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Task } from "../models/taskModel";
 import mongoose from "mongoose";
 
-//create a new task --POST--
+//create a new task --POST /api/tasks--
 export const createTask = async (req: Request, res: Response) => {
   try {
     const { title, description, category, priority, dueDate } = req.body;
@@ -23,7 +23,7 @@ export const createTask = async (req: Request, res: Response) => {
   }
 };
 
-//get all tasks --GET--
+//get all tasks --GET /api/tasks--
 export const getTasks = async (req: Request, res: Response) => {
   try {
     const {
@@ -77,6 +77,7 @@ export const getTasks = async (req: Request, res: Response) => {
   }
 };
 
+//GET /api/tasks/:id
 export const getTaskById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -104,5 +105,40 @@ export const getTaskById = async (req: Request, res: Response) => {
     res.json(task);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch task.", error: err });
+  }
+};
+
+// update an existing task --PUT /api/tasks/:id--
+export const updateTask = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    // Validate the id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      res.status(400).json({ message: "Invalid task ID." });
+    }
+
+    const { title, description, category, priority, dueDate } = req.body;
+
+    // Only allow updates to allowed fields
+    const update: any = {};
+    if (title !== undefined) update.title = title;
+    if (description !== undefined) update.description = description;
+    if (category !== undefined) update.category = category;
+    if (priority !== undefined) update.priority = priority;
+    if (dueDate !== undefined) update.dueDate = dueDate;
+
+    // Options: new:true to return updated doc; runValidators to enforce schema rules
+    const updatedTask = await Task.findByIdAndUpdate(id, update, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedTask) {
+      res.status(404).json({ message: "Task not found." });
+    }
+
+    res.json(updatedTask);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update task.", error: err });
   }
 };
