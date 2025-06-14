@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Task } from "../models/taskModel";
+import mongoose from "mongoose";
 
 //create a new task --POST--
 export const createTask = async (req: Request, res: Response) => {
@@ -73,5 +74,35 @@ export const getTasks = async (req: Request, res: Response) => {
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch tasks.", error: err });
+  }
+};
+
+export const getTaskById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // Validate the id format first
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      res.status(400).json({ message: "Invalid task ID." });
+    }
+
+    // Find task by id, and only if dueDate is in the future (or not set)
+    const now = new Date();
+    const task = await Task.findOne({
+      _id: id,
+      $or: [
+        { dueDate: { $gte: now } },
+        { dueDate: { $exists: false } },
+        { dueDate: null },
+      ],
+    });
+
+    if (!task) {
+      res.status(404).json({ message: "Task not found or expired." });
+    }
+
+    res.json(task);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch task.", error: err });
   }
 };
