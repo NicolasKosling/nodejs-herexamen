@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Task Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <h1>Task Dashboard</h1>
+  
+  <form method="GET" action="/" id="filterForm">
+    <label>
+      Category:
+      <select name="category">
+        <option value="">All</option>
+        <option value="Development" <%= category === "Development" ? "selected" : "" %>>Development</option>
+        <option value="Personal" <%= category === "Personal" ? "selected" : "" %>>Personal</option>
+        <!-- Add more as needed -->
+      </select>
+    </label>
+    <label>
+      Priority:
+      <select name="priority">
+        <option value="">All</option>
+        <option value="high" <%= priority === "high" ? "selected" : "" %>>High</option>
+        <option value="medium" <%= priority === "medium" ? "selected" : "" %>>Medium</option>
+        <option value="low" <%= priority === "low" ? "selected" : "" %>>Low</option>
+      </select>
+    </label>
+    <button type="submit">Filter</button>
+  </form>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Priority</th>
+        <th>Due Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (tasks && tasks.length > 0) { %>
+        <% tasks.forEach(task => { %>
+          <tr>
+            <td><%= task.title %></td>
+            <td><%= task.description %></td>
+            <td><%= task.category %></td>
+            <td><%= task.priority %></td>
+            <td><%= task.dueDate ? new Date(task.dueDate).toLocaleString() : '-' %></td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr><td colspan="5">No tasks found.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

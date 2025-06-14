@@ -1,0 +1,110 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f6f9fb;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  background: #e3f0fa;
+  color: #1861ac;
+  padding: 1rem 2rem;
+  margin: 0 0 1.5rem 0;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 2px 8px rgba(24, 97, 172, 0.05);
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+form label {
+  font-size: 1rem;
+  color: #1861ac;
+}
+
+form input,
+form select {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #d1e3f3;
+  border-radius: 5px;
+  background: #fff;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+form button {
+  background: #1861ac;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+form button:hover {
+  background: #12487f;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(24, 97, 172, 0.08);
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+
+th {
+  background: #1861ac;
+  color: #fff;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid #e3f0fa;
+  font-size: 1.1rem;
+}
+
+td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+tbody tr:nth-child(even) {
+  background: #f5fafd;
+}
+
+tbody tr:nth-child(odd) {
+  background: #fff;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 700px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+  th,
+  td {
+    padding: 1rem 0.5rem;
+  }
+  form {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+}
